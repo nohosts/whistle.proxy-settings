@@ -25,6 +25,9 @@ module.exports = function babel(api) {
       '@babel/plugin-syntax-import-meta',
       '@babel/plugin-proposal-class-properties',
       '@babel/plugin-proposal-json-strings',
+      ['@babel/plugin-transform-typescript', {
+        isTSX: true,
+      }],
       [
         '@babel/plugin-proposal-decorators',
         {

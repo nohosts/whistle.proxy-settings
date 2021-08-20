@@ -9,7 +9,6 @@ const rootDir = path.resolve(__dirname, '../../');
 module.exports = merge(common, {
   mode: 'development',
   plugins: [
-    // 文档坑 mode: 'production', 不会自动加入得手动加这个DefinePlugin
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('development'),
     }),

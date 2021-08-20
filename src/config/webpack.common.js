@@ -1,14 +1,12 @@
 const path = require('path');
-const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { whistleConfig: { serverName, defaultNohostAddress } } = require('../../package.json');
 
 const rootDir = path.resolve(__dirname, '../../');
 const srcDir = path.resolve(rootDir, 'src');
 
 module.exports = {
   entry: {
-    index: path.resolve(srcDir, 'pages/index/index'),
+    index: path.resolve(srcDir, 'pages/index'),
   },
   output: {
     filename: '[name].js',
@@ -16,7 +14,7 @@ module.exports = {
     libraryTarget: 'umd',
   },
   resolve: {
-    extensions: ['.js', '.jsx', 'json'],
+    extensions: ['.js', '.jsx', 'json', '.ts', '.tsx'],
     mainFields: ['jsnext:main', 'browser', 'main'],
     symlinks: true,
   },
