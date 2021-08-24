@@ -8,5 +8,11 @@
 }
 
 .cur-proxy-url {
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+}
+
+.switch-proxy {
   font-size: 24px;
 }

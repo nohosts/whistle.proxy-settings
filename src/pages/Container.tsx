@@ -16,6 +16,7 @@ export enum Status {
 export const Container: React.FC = () => {
   const [status, setStatus] = useState<Status>(Status.Init);
   const [proxyUrl, setProxyUrl] = useState('');
+  const [enabled, setEnabled] = useState(true);
 
   const setProxy = (url) => {
     setProxyUrl(url);
@@ -23,10 +24,11 @@ export const Container: React.FC = () => {
   }
 
   useEffect(() => {
-    // TODO 从接口拉取缓存的设置情况
-    getProxyUrl().then((proxyUrl) => {
+    getProxyUrl().then((result) => {
+      const { proxyUrl, enabled: enabledResult } = result;
       if (proxyUrl) {
         setProxy(proxyUrl);
+        setEnabled(enabledResult);
       }
     });
   }, []);
@@ -37,7 +39,12 @@ export const Container: React.FC = () => {
     );
   } else if (status === Status.Setup) {
     return (
-      <Setup onReset={() => setStatus(Status.Setting)} proxyUrl={proxyUrl} />
+      <Setup
+        onSetProxyUrl={setProxy}
+        onReset={() => setStatus(Status.Setting)}
+        proxyUrl={proxyUrl}
+        enabled={enabled}
+      />
     );
   }
 

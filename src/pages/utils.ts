@@ -44,3 +44,5 @@ export const historyStorage = {
     return historyData;
   }
 };
+
+export const proxyUrlReg = /(http(s?):\/\/|(proxy:\/\/)?(\w\.)+)/

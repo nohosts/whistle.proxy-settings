@@ -7,8 +7,8 @@ const data = {};
 
 uiServer(server, {
   storage: {
-    set: (key, val) => { data[key] = val },
-    get: (key) => data[key],
+    setProperty: (key, val) => { data[key] = val },
+    getProperty: (key) => data[key],
   },
 });
 
