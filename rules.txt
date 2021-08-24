@@ -1,0 +1,1 @@
+@whistle.proxy-settings/cgi-bin/rules
