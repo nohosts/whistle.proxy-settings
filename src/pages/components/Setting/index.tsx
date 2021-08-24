@@ -19,8 +19,8 @@ const TipData = [
     title: '3. 通过二级代理访问 Whistle 或者 Nohost',
     desc: (
       <>
-        <p>二级代理到 Nohost：http://nohostAddress:nohostPort?proxy=proxyHost:proxyPort</p>
-        <p>二级代理到 Whistle：proxy://whistleAddress:whistlePort?proxy=proxyHost:proxyPort</p>
+        <div>二级代理到 Nohost：http://nohostAddress:nohostPort?proxy=proxyHost:proxyPort</div>
+        <div>二级代理到 Whistle：proxy://whistleAddress:whistlePort?proxy=proxyHost:proxyPort</div>
       </>
     ),
   },
@@ -28,8 +28,8 @@ const TipData = [
     title: '4. 通过 Nginx 反向代理到 Nohost 或 Whistle',
     desc: (
       <>
-        <p>代理到 Nohost： http://nohostAddress:nohostPort?nginx=nginxHost:nginxPort</p>
-        <p>代理到 Whistle: proxy://whistleAddress:whistlePort?nginx=nginxHost:nginxPort</p>
+        <div>代理到 Nohost： http://nohostAddress:nohostPort?nginx=nginxHost:nginxPort</div>
+        <div>代理到 Whistle: proxy://whistleAddress:whistlePort?nginx=nginxHost:nginxPort</div>
       </>
     ),
   },
@@ -115,7 +115,7 @@ export const Setting: React.FC<Props> = (props) => {
         </Button>
         <Button type="link" size="large" onClick={() => setShowHistoryModal(true)}>历史记录</Button>
       </div>
-      <div className="https-tip">如果需要解析https，请<Button onClick={onInstallCert} type="link">点击安装证书</Button></div>
+      <div className="https-tip">如果需要解析 HTTPS，请<Button onClick={onInstallCert} type="link">点击安装证书</Button></div>
       <Tip />
       <History
         visible={showHistoryModal}
