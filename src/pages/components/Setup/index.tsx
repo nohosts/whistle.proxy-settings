@@ -35,6 +35,11 @@ export const Setup: React.FC<Props> = (props) => {
     const val = e.target.checked;
     switchProxy(val).then((success) => {
       if (success) {
+        if (val) {
+          (window as any).enableProxy?.();
+        } else {
+          (window as any).disableProxy?.();
+        }
         setIsUsedProxy(val);
         message.success('切换代理成功');
         return;
