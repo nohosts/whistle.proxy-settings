@@ -10,7 +10,7 @@ interface Props {
 export const Init: React.FC<Props> = (props) => (
   <div className="init-container">
     <Button type="primary" size="large" onClick={props.onClick}>
-      点击设置代理
+      设置代理
     </Button>
   </div>
 );
