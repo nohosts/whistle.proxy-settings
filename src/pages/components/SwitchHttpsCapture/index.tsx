@@ -11,6 +11,11 @@ export const SwitchHttpsCapture: React.FC = () => {
     switchCaptureHttps(val).then((result) => {
       if (result) {
         setCaptureHttps(val);
+        if (val) {
+          (window as any).enableProxy?.();
+        } else {
+          (window as any).disableProxy?.();
+        }
         message.success(`${val ? '开启' : '关闭'}切换https抓包成功`);
       } else {
         message.error(`${val ? '开启' : '关闭'}切换https抓包失败`);
