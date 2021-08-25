@@ -29,6 +29,11 @@ export const Container: React.FC = () => {
       if (proxyUrl) {
         setProxy(proxyUrl);
         setEnabled(enabledResult);
+        if (enabledResult) {
+          (window as any).enableProxy?.();
+        } else {
+          (window as any).disableProxy?.();
+        }
       }
     });
   }, []);
