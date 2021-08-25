@@ -25,7 +25,7 @@ export const Container: React.FC = () => {
 
   useEffect(() => {
     getProxyUrl().then((result) => {
-      const { proxyUrl, enabled: enabledResult } = result;
+      const { proxyUrl, proxyEnabled: enabledResult } = result;
       if (proxyUrl) {
         setProxy(proxyUrl);
         setEnabled(enabledResult);

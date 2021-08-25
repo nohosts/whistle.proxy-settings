@@ -11,6 +11,7 @@
     "prepublish": "npm run dist"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "cert-helper": "^1.0.1",
     "koa": "^2.7.0",
     "koa-bodyparser": "^4.2.1",
@@ -41,7 +42,6 @@
     "@types/react": "^16.14.14",
     "@types/react-dom": "^16.9.14",
     "antd": "^3.25.1",
-    "axios": "^0.21.1",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.0.0",
     "core-js": "^2.6.9",

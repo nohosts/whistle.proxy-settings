@@ -1,1 +1,1 @@
-# whistle.proxy
+# whistle.proxy-setting

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Checkbox, message } from 'antd';
+import { Button, Checkbox, message, Tooltip } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox/Checkbox';
 import { History } from '../History';
+import { SwitchHttpsCapture } from '../SwitchHttpsCapture';
 import { switchProxy } from '../../fetch';
+import { nohostProxyUrlReg } from '../../utils';
 
 import './index.css';
 
@@ -13,9 +15,21 @@ interface Props {
   enabled: boolean;
 }
 
+enum ProxyType {
+  Nohost = 'nohost',
+  Whistle = 'whistle',
+  Init = '',
+};
+
+const ProxyTypeTextMap = {
+  [ProxyType.Nohost]: 'nohost',
+  [ProxyType.Whistle]: 'whistle',
+};
+
 export const Setup: React.FC<Props> = (props) => {
   const [showHistoryModal, setShowHistoryModal] = useState(false);
   const [isUsedProxy, setIsUsedProxy] = useState(true);
+  const [proxyType, setProxyType] = useState<ProxyType>(ProxyType.Init);
 
   const onUseProxy = (e: CheckboxChangeEvent) => {
     const val = e.target.checked;
@@ -38,6 +52,8 @@ export const Setup: React.FC<Props> = (props) => {
   useEffect(() => {
     // proxyUrl变更的时候，默认是开启
     setIsUsedProxy(true);
+    const isNohostProxyType = nohostProxyUrlReg.test(props.proxyUrl);
+    setProxyType(isNohostProxyType ? ProxyType.Nohost : ProxyType.Whistle);
   }, [props.proxyUrl]);
 
   useEffect(() => {
@@ -47,11 +63,19 @@ export const Setup: React.FC<Props> = (props) => {
   return (
     <div className="setup-container">
       <div className="cur-proxy-url">
-        <Checkbox className="switch-proxy" checked={isUsedProxy} onChange={onUseProxy} />
+        <Tooltip title="点击开启或者关闭代理">
+          <Checkbox className="switch-proxy" checked={isUsedProxy} onChange={onUseProxy} />
+        </Tooltip>
         当前代理: {props.proxyUrl}
       </div>
       <div>
-        <Button type="link">XXXX</Button>
+        <SwitchHttpsCapture />
+      </div>
+      <div>
+        {
+          proxyType !== ProxyType.Init &&
+            <Button type="link">打开{ProxyTypeTextMap[proxyType]}</Button>
+        }
         <Button onClick={() => setShowHistoryModal(true)} type="link">历史记录</Button>
         <Button onClick={() => props.onReset()} type="link">重新设置</Button>
       </div>

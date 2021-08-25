@@ -21,3 +21,9 @@ export const switchProxy = async (enabled: boolean) => {
   const { retcode } = res.data;
   return retcode === 0;
 };
+
+export const switchCaptureHttps = async (enabled: boolean) => {
+  const res = await axios.post('/cgi-bin/switchCaptureHttps', { enabled });
+  const { retcode } = res.data;
+  return retcode === 0;
+};

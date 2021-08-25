@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Input, Button, List, message } from 'antd';
-import { historyStorage } from '../../utils';
+import { historyStorage, whistleProxyUrlReg, nohostProxyUrlReg } from '../../utils';
 import { History } from '../History';
-import { setProxyUrl as setProxyUrlCgi, installCert } from '../../fetch';
+import { setProxyUrl as setProxyUrlCgi } from '../../fetch';
+import { SwitchHttpsCapture } from '../SwitchHttpsCapture';
 
 import './index.css';
 
@@ -60,6 +61,10 @@ export const Setting: React.FC<Props> = (props) => {
   const [showHistoryModal, setShowHistoryModal] = useState(false);
 
   const onClick = () => {
+    if (!nohostProxyUrlReg.test(proxyUrl) && !whistleProxyUrlReg.test(proxyUrl)) {
+      message.info('代理地址不符合规则');
+      return;
+    }
     setProxyUrlCgi(proxyUrl).then((res) => {
       const { retcode } = res.data;
       if (retcode !== 0) {
@@ -76,46 +81,40 @@ export const Setting: React.FC<Props> = (props) => {
     });
   };
 
-  const onInstallCert = () => {
-    installCert().then((result) => {
-      let msg = '安装证书成功';
-      let type = 'success';
-      if (!result) {
-        msg = '安装证书失败请重新安装';
-        type = 'error'
-      }
-      message[type](msg);
-    });
-  }
-
   const onHistoryModalEdit = (url: string) => {
     setShowHistoryModal(false);
     setProxyUrl(url);
-  }
+  };
 
   return (
     <div className="setting-container">
       <div className="proxy-url-container">
         <span className="proxy-url-label">代理地址：</span>
-        <Input
-          value={proxyUrl}
-          onChange={(e) => setProxyUrl(e.target.value)}
-          placeholder="请输入代理地址"
-          size="large"
-          className="proxy-url-input"
-        />
-        <Button
-          size="large"
-          type="primary"
-          className="submit-btn"
-          onClick={onClick}
-          disabled={!proxyUrl}
-        >
-          确定
-        </Button>
-        <Button type="link" size="large" onClick={() => setShowHistoryModal(true)}>历史记录</Button>
+        <div>
+          <div className="proxy-url-input">
+            <Input
+              value={proxyUrl}
+              onChange={(e) => setProxyUrl(e.target.value)}
+              placeholder="请输入代理地址"
+              size="large"
+              className="proxy-url-input"
+            />
+            <Button
+              size="large"
+              type="primary"
+              className="submit-btn"
+              onClick={onClick}
+              disabled={!proxyUrl}
+            >
+              确定
+            </Button>
+            <Button type="link" size="large" onClick={() => setShowHistoryModal(true)}>历史记录</Button>
+          </div>
+          <div className="https-tip">
+            <SwitchHttpsCapture />
+          </div>
+        </div>
       </div>
-      <div className="https-tip">如果需要解析 HTTPS，请<Button onClick={onInstallCert} type="link">点击安装证书</Button></div>
       <Tip />
       <History
         visible={showHistoryModal}
