@@ -1,6 +1,6 @@
 {
   "name": "whistle.proxy-settings",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "",
   "scripts": {
     "lint": "eslint *.js lib",

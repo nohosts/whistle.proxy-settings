@@ -1,5 +1,13 @@
 import axios from 'axios';
 
+axios.interceptors.request.use((config) => {
+  const configClone = { ...config };
+  if (process.env.NODE_ENV === 'production') {
+    configClone.url = `/plugin.proxy-settings${configClone.url}`;
+  }
+  return configClone;
+}, )
+
 export const setProxyUrl = (proxyUrl) => {
   return axios.post('/cgi-bin/setProxyUrl', { proxyUrl });
 };

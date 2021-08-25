@@ -36,7 +36,7 @@ export const History: React.FC<Props> = (props) => {
         id: Date.now(),
       });
       setData([...historyData]);
-      props?.onUse(url);
+      props?.onUse?.(url);
     });
   }
 
