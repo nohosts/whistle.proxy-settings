@@ -45,5 +45,5 @@ export const historyStorage = {
   }
 };
 
-export const nohostProxyUrlReg = /^http(s?):\/\/(?=.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\d+)?$/;
-export const whistleProxyUrlReg = /^((proxy:\/\/)(?=.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+|(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+)(:\d+)?$/;
+export const nohostProxyUrlReg = /^(http(s?):\/\/(?=.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+(:\d+)?((\/\w+)+)?)([?|&][\W\w]+)?$/;
+export const whistleProxyUrlReg = /^((proxy:\/\/)(?=.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+|(?=^.{3,255}$)[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+)(:\d+)?((\/\w+)+)?([?|&][\W\w]+)?$/;

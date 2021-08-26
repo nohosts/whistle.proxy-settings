@@ -108,18 +108,21 @@ export const Setting: React.FC<Props> = (props) => {
             >
               确定
             </Button>
-            <Button type="link" size="large" onClick={() => setShowHistoryModal(true)}>历史记录</Button>
+            <Button className="history-btn" type="link" size="large" onClick={() => setShowHistoryModal(true)}>历史记录</Button>
           </div>
           <div className="https-tip">
             <SwitchHttpsCapture />
           </div>
         </div>
       </div>
-      <Tip />
+      <div className="set-proxy-tips">
+        <Tip />
+      </div>
       <History
         visible={showHistoryModal}
         onClose={() => setShowHistoryModal(false)}
         onEdit={onHistoryModalEdit}
+        onUse={props.setProxy}
         showEditBtn
       />
     </div>

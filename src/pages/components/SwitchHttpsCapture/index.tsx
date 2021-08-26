@@ -3,6 +3,8 @@ import { Checkbox, Tooltip, message, Button } from 'antd';
 import { CheckboxChangeEvent } from 'antd/lib/checkbox';
 import { switchCaptureHttps, installCert, getProxyUrl } from '../../fetch';
 
+import './index.css';
+
 export const SwitchHttpsCapture: React.FC = () => {
   const [captureHttps, setCaptureHttps] = useState(false);
 
@@ -40,9 +42,9 @@ export const SwitchHttpsCapture: React.FC = () => {
   return (
     <span>
       <Tooltip title="点击开启或关闭https抓包">
-        <Checkbox checked={captureHttps} onChange={onSwitchCaptureHttps} />
+        <Checkbox className="capture-https-checkbox" checked={captureHttps} onChange={onSwitchCaptureHttps} />
       </Tooltip>
-      如果需要解析 HTTPS，请<Button onClick={onInstallCert} type="link">点击安装证书</Button>
+      <span className="capture-https-desc">如果需要解析 HTTPS，请<Button onClick={onInstallCert} type="link">点击安装证书</Button></span>
     </span>
   );
 };

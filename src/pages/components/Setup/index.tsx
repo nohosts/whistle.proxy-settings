@@ -21,11 +21,6 @@ enum ProxyType {
   Init = '',
 };
 
-const ProxyTypeTextMap = {
-  [ProxyType.Nohost]: 'nohost',
-  [ProxyType.Whistle]: 'whistle',
-};
-
 export const Setup: React.FC<Props> = (props) => {
   const [showHistoryModal, setShowHistoryModal] = useState(false);
   const [isUsedProxy, setIsUsedProxy] = useState(true);
@@ -52,7 +47,17 @@ export const Setup: React.FC<Props> = (props) => {
     props.onSetProxyUrl(url);
     setIsUsedProxy(true);
     setShowHistoryModal(false);
-  }
+  };
+
+  const onOpenUrl = () => {
+    if (proxyType === ProxyType.Whistle) {
+      const url = props.proxyUrl.replace('proxy://', '');
+      window.open(`http://${url}`);
+    } else {
+      const url = props.proxyUrl.match(nohostProxyUrlReg)?.[1];
+      window.open(url);
+    }
+  };
 
   useEffect(() => {
     // proxyUrl变更的时候，默认是开启
@@ -67,22 +72,24 @@ export const Setup: React.FC<Props> = (props) => {
 
   return (
     <div className="setup-container">
-      <div className="cur-proxy-url">
-        <Tooltip title="点击开启或者关闭代理">
-          <Checkbox className="switch-proxy" checked={isUsedProxy} onChange={onUseProxy} />
-        </Tooltip>
-        当前代理: {props.proxyUrl}
-      </div>
       <div>
-        <SwitchHttpsCapture />
-      </div>
-      <div>
-        {
-          proxyType !== ProxyType.Init &&
-            <Button type="link">打开{ProxyTypeTextMap[proxyType]}</Button>
-        }
-        <Button onClick={() => setShowHistoryModal(true)} type="link">历史记录</Button>
-        <Button onClick={() => props.onReset()} type="link">重新设置</Button>
+        <div className="cur-proxy-url">
+          <Tooltip title="点击开启或者关闭代理">
+            <Checkbox className="switch-proxy" checked={isUsedProxy} onChange={onUseProxy} />
+          </Tooltip>
+          <span className="cur-proxy-url-desc">当前代理: {props.proxyUrl}</span>
+        </div>
+        <div className="switch-https-capture-container">
+          <SwitchHttpsCapture />
+        </div>
+        <div className="cur-proxy-operation">
+          {
+            proxyType !== ProxyType.Init &&
+              <Button onClick={onOpenUrl} type="link">{proxyType === ProxyType.Nohost ? '选择环境' : '打开whistle'}</Button>
+          }
+          <Button onClick={() => setShowHistoryModal(true)} type="link">历史记录</Button>
+          <Button onClick={() => props.onReset()} type="link">重新设置</Button>
+        </div>
       </div>
       <History
         visible={showHistoryModal}

@@ -8,11 +8,24 @@
 }
 
 .cur-proxy-url {
-  font-size: 18px;
+  font-size: 24px;
   display: flex;
   align-items: center;
+  margin-bottom: 12px;
 }
 
 .switch-proxy {
   font-size: 24px;
+}
+
+.switch-https-capture-container, .switch-https-capture-container .ant-btn {
+  font-size: 18px;
+}
+
+.cur-proxy-url-desc {
+  margin-left: 6px;
+}
+
+.cur-proxy-operation {
+  margin-top: 12px;
 }

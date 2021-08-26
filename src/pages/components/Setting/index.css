@@ -26,6 +26,10 @@
   font-size: 18px;
 }
 
+.proxy-url-input .history-btn {
+  padding: 0;
+}
+
 .proxy-url-input .ant-input {
   width: 400px;
 }
